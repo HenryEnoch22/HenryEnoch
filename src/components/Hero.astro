@@ -1,50 +1,66 @@
 ---
-import DownloadCv from './react/DownloadCvButton.jsx';
+import DownloadCv from './react/DownloadCvButton.tsx';
 ---
 
-<section class="min-h-[85vh] flex items-center py-8 px-5">
+<section id="inicio" class="min-h-[85vh] flex items-center py-15 px-5 sm:px-10 lg:px-20 xl:px-28 relative overflow-hidden">
 
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center w-full">
+    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-16 items-center w-full">
 
         <!-- Texto -->
         <div class="max-w-xl mx-auto md:mx-0">
 
-            <span class="bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-4 py-1 rounded-full text-sm font-semibold" data-i18n="hero.badge">
+            <span class="animate-fade-up inline-block bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-4 py-1 rounded-full text-sm font-semibold" style="animation-delay: 0.1s" data-i18n="hero.badge">
                 It's me
             </span>
 
-            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black mt-6 leading-none text-gray-900 dark:text-white">
+            <h1 class="animate-fade-up text-5xl sm:text-6xl lg:text-7xl font-black mt-6 leading-none text-gray-900 dark:text-white" style="animation-delay: 0.2s">
                 <span data-i18n="hero.name1">Henry</span> <br>
                 <span data-i18n="hero.name2">Enoch</span>
             </h1>
 
-            <h1 class="lg:ml-24 text-5xl sm:text-6xl lg:text-7xl font-black mt-5 leading-none text-blue-500" data-i18n="hero.lastName">
+            <h1 class="animate-fade-up lg:ml-24 text-5xl sm:text-6xl lg:text-7xl font-black mt-5 leading-none text-blue-500" style="animation-delay: 0.3s" data-i18n="hero.lastName">
                 Francisco Vázquez
             </h1>
 
-            <p class="mt-8 text-gray-600 dark:text-gray-400 text-lg leading-relaxed text-justify max-w-xl" data-i18n="hero.description">
+            <p class="animate-fade-up mt-8 text-gray-600 dark:text-gray-400 text-lg leading-relaxed text-justify max-w-xl" style="animation-delay: 0.4s" data-i18n="hero.description">
                 Ingeniero de Software con afinidad al desarrollo web y enfoque Full Stack. Me gusta crear aplicaciones escalables y funcionales, combinando diseño intuitivo con soluciones eficientes tanto en frontend como en backend.
             </p>
 
-           <DownloadCv client:load />
+           <div class="animate-fade-up" style="animation-delay: 0.5s">
+               <DownloadCv client:load />
+           </div>
 
         </div>
 
         <!-- Imagen -->
         <div class="flex justify-center md:justify-start">
 
-            <div class="rounded-2xl overflow-hidden w-[280px] sm:w-[350px] lg:w-[420px] shadow-xl dark:shadow-black/30 ring-1 ring-gray-200 dark:ring-gray-700">
+            <div class="animate-fade-in relative group" style="animation-delay: 0.4s">
+                <div class="absolute -inset-3 bg-gradient-to-br from-blue-500/20 to-purple-500/20 dark:from-blue-500/10 dark:to-purple-500/10 rounded-3xl blur-2xl"></div>
+                <div class="relative rounded-2xl overflow-hidden w-[280px] sm:w-[350px] lg:w-[420px] shadow-xl dark:shadow-black/30 ring-1 ring-gray-200 dark:ring-gray-700 animate-float">
 
-                <img
-                    src="/fotos/HenryEnoch.jpeg"
-                    alt="profile"
-                    class="w-full h-auto object-cover"
-                />
+                    <img
+                        src="/fotos/HenryEnoch.jpeg"
+                        alt="profile"
+                        class="w-full h-auto object-cover"
+                    />
 
+                </div>
             </div>
 
         </div>
 
     </div>
+
+    <!-- Scroll indicator -->
+    <a
+        href="#proyectos"
+        class="animate-fade-in absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-gray-400 dark:text-gray-500 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
+        style="animation-delay: 1s"
+        aria-label="Ver proyectos"
+    >
+        <span class="text-xs font-medium tracking-widest uppercase">Scroll</span>
+        <i class="fa-solid fa-chevron-down animate-scroll-hint"></i>
+    </a>
 
 </section>

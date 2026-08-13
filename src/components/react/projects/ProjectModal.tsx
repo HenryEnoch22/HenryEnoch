@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import type { Project } from "../../../data/projects";
 import { useLanguage } from "../../../i18n/store";
 
@@ -16,7 +17,7 @@ export default function ProjectModal({
 
     if (!project) return null;
 
-    return (
+    return createPortal(
         <div
             className="
                 fixed inset-0
@@ -35,13 +36,13 @@ export default function ProjectModal({
                     max-w-4xl
                     w-full
                     max-h-[90vh]
-                    overflow-y-auto
-                    p-8
+                    flex flex-col
+                    overflow-hidden
                     shadow-2xl
                 "
                 onClick={(e) => e.stopPropagation()}
             >
-                <div className="flex justify-between items-start mb-8">
+                <div className="flex justify-between items-start gap-4 p-8 pb-6 shrink-0">
 
                     <div>
                         <h2 className="text-3xl font-black text-gray-900 dark:text-white">
@@ -68,6 +69,8 @@ export default function ProjectModal({
                     </button>
 
                 </div>
+
+                <div className="no-scrollbar overflow-y-auto p-8 pt-0">
 
                 <div className="mb-8">
                     <h3 className="font-bold text-gray-900 dark:text-white mb-3">
@@ -164,7 +167,9 @@ export default function ProjectModal({
                     </div>
                 ) : null}
 
+                </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 }

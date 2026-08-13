@@ -10,7 +10,7 @@ import { translations } from '../i18n/translations';
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" href="/LogoHenry-Negro.svg" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 		<meta name="generator" content={Astro.generator} />
@@ -31,7 +31,7 @@ import { translations } from '../i18n/translations';
 
 			<Sidebar />
 
-			<div class="flex-1 flex flex-col ml-12">
+			<div class="flex-1 flex flex-col ml-12 min-w-0">
 
 				<Navbar />
 
@@ -45,9 +45,35 @@ import { translations } from '../i18n/translations';
 
 		</div>
 
+		<!-- Scroll to top -->
+		<button
+			id="scroll-top"
+			class="fixed bottom-6 right-6 w-11 h-11 z-40 flex items-center justify-center rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/30 opacity-0 pointer-events-none transition-all duration-300 hover:-translate-y-1"
+			aria-label="Volver arriba"
+		>
+			<i class="fa-solid fa-arrow-up"></i>
+		</button>
+
 	</body>
 
 </html>
+
+<script>
+	const scrollTop = document.getElementById('scroll-top');
+
+	const onScroll = () => {
+		const show = window.scrollY > 500;
+		scrollTop?.classList.toggle('opacity-0', !show);
+		scrollTop?.classList.toggle('pointer-events-none', !show);
+	};
+
+	window.addEventListener('scroll', onScroll, { passive: true });
+	onScroll();
+
+	scrollTop?.addEventListener('click', () => {
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	});
+</script>
 
 <script define:vars={{ translations }}>
 	const t = translations;
@@ -78,4 +104,20 @@ import { translations } from '../i18n/translations';
 	} else {
 		init();
 	}
+</script>
+
+<script>
+	const revealObserver = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('reveal-visible');
+					revealObserver.unobserve(entry.target);
+				}
+			});
+		},
+		{ threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+	);
+
+	document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 </script>

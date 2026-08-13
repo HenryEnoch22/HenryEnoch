@@ -1,32 +1,27 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ProjectsGrid from "../components/react/projects/ProjectsGrid";
+import ProjectsGrid from "../react/projects/ProjectsGrid";
 ---
 
-<Layout>
-
-<section class="min-h-screen py-10 px-5">
-
+<section id="proyectos" class="relative py-6 px-5">
     <div class="max-w-6xl mx-auto">
 
         <div class="mb-16">
-            <p class="text-blue-500 font-bold tracking-widest text-sm uppercase mb-3" data-i18n="projects.subtitle">
+            <p class="text-blue-500 font-bold tracking-widest text-sm uppercase mb-3 reveal" data-i18n="projects.subtitle">
                 Mis Proyectos
             </p>
 
-            <h1 class="text-4xl md:text-5xl font-black mb-6 text-gray-900 dark:text-white" data-i18n="projects.title">
+            <h2 class="text-4xl md:text-5xl font-black mb-6 text-gray-900 dark:text-white reveal" data-i18n="projects.title">
                 Proyectos en los que he trabajado
-            </h1>
+            </h2>
 
-            <p class="text-lg text-gray-500 dark:text-gray-400 leading-relaxed whitespace-pre-line max-w-4xl text-justify" data-i18n="projects.description">
+            <p class="text-lg text-gray-500 dark:text-gray-400 leading-relaxed whitespace-pre-line text-justify reveal" data-i18n="projects.description">
                 Desde el año 2024 he participado en proyectos académicos, de emprendimiento y empresariales. Estas experiencias me han permitido colaborar en el desarrollo de aplicaciones móviles, plataformas web y sistemas administrativos, fortaleciendo mis conocimientos en levantamiento de requisitos, diseño y desarrollo de software, modelado y gestión de bases de datos, integración de APIs y despliegue de aplicaciones.
             </p>
         </div>
 
-        <ProjectsGrid client:load />
+        <div class="reveal">
+            <ProjectsGrid client:load />
+        </div>
 
     </div>
-
 </section>
-
-</Layout>

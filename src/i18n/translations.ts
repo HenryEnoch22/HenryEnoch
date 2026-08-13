@@ -116,6 +116,7 @@ Cada solicitud pasa por un flujo de estados que tanto el cliente como el adminis
     },
     about: {
       subtitle: 'Quién soy',
+      title: 'Sobre mí',
       intro:
         'Desde pequeño sentí una gran curiosidad por el mundo tecnológico y desde inicios del 2024 empecé a participar en el desarrollo de software empresarial.',
       p1: 'Estudio Ingeniería de Software en la Universidad Veracruzana, próximo a egresar en julio de 2026.',
@@ -289,6 +290,7 @@ Each request goes through a status flow that both the client and administrator c
     },
     about: {
       subtitle: 'Who I am',
+      title: 'About me',
       intro:
         "Since I was a child I felt a great curiosity for the technological world and since early 2024 I started participating in enterprise software development.",
       p1: 'I study Software Engineering at Universidad Veracruzana, about to graduate in July 2026.',

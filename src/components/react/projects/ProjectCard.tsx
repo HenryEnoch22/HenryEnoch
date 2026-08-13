@@ -18,7 +18,7 @@ export default function ProjectCard({
             className="
                 bg-white dark:bg-gray-800/80
                 rounded-2xl
-                p-6
+                p-4
                 shadow-sm hover:shadow-lg
                 hover:-translate-y-1
                 transition-all duration-300
@@ -30,13 +30,13 @@ export default function ProjectCard({
             "
         >
 
-            <div className="flex items-center gap-4 mb-5">
+            <div className="flex items-center gap-4 mb-3">
 
                 <img
                     src={project.logo}
                     alt={`${project.name} logo`}
                     className="
-                        w-14 h-14
+                        w-12 h-12
                         rounded-xl
                         object-contain
                         border border-gray-200 dark:border-gray-600
@@ -58,7 +58,7 @@ export default function ProjectCard({
 
             </div>
 
-            <p className="text-gray-500 dark:text-gray-400 mb-5 text-justify leading-relaxed">
+            <p className="text-gray-500 dark:text-gray-400 mb-3 text-justify leading-relaxed line-clamp-3">
                 {p?.shortDescription ?? project.shortDescription}
             </p>
 

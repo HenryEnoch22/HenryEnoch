@@ -1,8 +1,6 @@
 ---
 import ThemeToggle from '../react/ThemeToggle.tsx';
 import LanguageToggle from '../react/LanguageToggle.tsx';
-
-const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 
 <header class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 shadow-sm dark:shadow-gray-950/50 sticky top-0 z-40">
@@ -14,36 +12,27 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
             <div class="font-semibold text-gray-500 dark:text-gray-400 flex items-center gap-4 sm:gap-6 text-sm sm:text-base">
 
                 <a
-                    href="/"
-                    class={`hover:text-gray-900 dark:hover:text-white transition pb-1 border-b-2 ${
-                        pathname === '/'
-                            ? 'border-blue-600 text-gray-900 dark:text-white'
-                            : 'border-transparent'
-                    }`}
+                    href="#inicio"
+                    class="nav-link border-b-2 border-transparent hover:text-gray-900 dark:hover:text-white transition pb-1"
+                    data-nav-link="inicio"
                     data-i18n="nav.home"
                 >
                     Inicio
                 </a>
 
                 <a
-                    href="/projects"
-                    class={`hover:text-gray-900 dark:hover:text-white transition pb-1 border-b-2 ${
-                        pathname === '/projects'
-                            ? 'border-blue-600 text-gray-900 dark:text-white'
-                            : 'border-transparent'
-                    }`}
+                    href="#proyectos"
+                    class="nav-link border-b-2 border-transparent hover:text-gray-900 dark:hover:text-white transition pb-1"
+                    data-nav-link="proyectos"
                     data-i18n="nav.projects"
                 >
                     Proyectos
                 </a>
 
                 <a
-                    href="/about"
-                    class={`hover:text-gray-900 dark:hover:text-white transition pb-1 border-b-2 ${
-                        pathname === '/about'
-                            ? 'border-blue-600 text-gray-900 dark:text-white'
-                            : 'border-transparent'
-                    }`}
+                    href="#sobre-mi"
+                    class="nav-link border-b-2 border-transparent hover:text-gray-900 dark:hover:text-white transition pb-1"
+                    data-nav-link="sobre-mi"
                     data-i18n="nav.about"
                 >
                     Sobre mí
@@ -70,9 +59,38 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 
         <div
             id="mobile-menu"
-            class="hidden md:hidden absolute top-full right-0 mt-2 w-44 z-50 bg-white dark:bg-gray-900 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden"
+            class="hidden md:hidden absolute top-full right-0 mt-2 w-56 z-50 bg-white dark:bg-gray-900 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden"
         >
-            <div class="py-1">
+            <div class="py-2">
+
+                <a
+                    href="#inicio"
+                    class="nav-link block px-4 py-2.5 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition font-medium"
+                    data-nav-link="inicio"
+                    data-i18n="nav.home"
+                >
+                    Inicio
+                </a>
+
+                <a
+                    href="#proyectos"
+                    class="nav-link block px-4 py-2.5 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition font-medium"
+                    data-nav-link="proyectos"
+                    data-i18n="nav.projects"
+                >
+                    Proyectos
+                </a>
+
+                <a
+                    href="#sobre-mi"
+                    class="nav-link block px-4 py-2.5 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition font-medium"
+                    data-nav-link="sobre-mi"
+                    data-i18n="nav.about"
+                >
+                    Sobre mí
+                </a>
+
+                <hr class="my-2 border-gray-100 dark:border-gray-800">
 
                 <div
                     class="language-item flex items-center justify-between px-4 py-2.5 text-sm text-gray-600 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition select-none"
@@ -80,8 +98,6 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
                     <span data-i18n="nav.language">Idioma</span>
                     <LanguageToggle client:load />
                 </div>
-
-                <hr class="border-gray-100 dark:border-gray-800">
 
                 <div
                     class="theme-item flex items-center justify-between px-4 py-2.5 text-sm text-gray-600 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition select-none"
@@ -159,5 +175,43 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
         if (btn && !btn.contains(target)) {
             btn.click();
         }
+    });
+
+    // Close the mobile menu after clicking an anchor link
+    document.querySelectorAll('#mobile-menu .nav-link').forEach((link) => {
+        link.addEventListener('click', () => {
+            closeMenu();
+        });
+    });
+
+    // Scroll-spy: highlight the active section link
+    const navLinks = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
+    const sections = ['inicio', 'proyectos', 'sobre-mi'];
+
+    const setActive = (active: string) => {
+        navLinks.forEach((link) => {
+            const isActive = link.dataset.navLink === active;
+            link.classList.toggle('border-blue-600', isActive && link.classList.contains('border-b-2'));
+            link.classList.toggle('text-gray-900', isActive && link.classList.contains('border-b-2'));
+            link.classList.toggle('dark:text-white', isActive && link.classList.contains('border-b-2'));
+            link.classList.toggle('text-blue-600', isActive && !link.classList.contains('border-b-2'));
+            link.classList.toggle('border-transparent', !isActive && link.classList.contains('border-b-2'));
+        });
+    };
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActive(entry.target.id);
+                }
+            });
+        },
+        { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+    );
+
+    sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
     });
 </script>
